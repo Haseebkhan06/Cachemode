@@ -1,0 +1,113 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create account | CacheMode</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: #f7f8f6; color: #18221c;
+        }
+        .page { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 30px; }
+        .card {
+            width: 100%; max-width: 520px; background: white; border: 1px solid #e6ebe7;
+            border-radius: 24px; box-shadow: 0 20px 60px rgba(24, 61, 43, 0.07); padding: 38px 32px;
+        }
+        .brand { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
+        .brand-mark {
+            width: 42px; height: 42px; border-radius: 12px; display: flex; align-items: center; justify-content: center;
+            background: #183d2b; color: white; font-weight: 900;
+        }
+        .brand-name { font-size: 22px; font-weight: 800; }
+        .brand-name span { color: #486d58; }
+        h2 { font-size: 30px; letter-spacing: -1px; margin-bottom: 6px; }
+        .subtitle { color: #7f8a84; font-size: 12px; margin-bottom: 28px; }
+        .field-group { margin-bottom: 18px; }
+        .field-group label { display: block; font-size: 10px; font-weight: 700; margin-bottom: 7px; }
+        .input-field {
+            width: 100%; height: 46px; border: 1px solid #dfe5e0; border-radius: 10px; padding: 0 13px;
+            font-size: 11px; outline: none; transition: 0.2s ease;
+        }
+        .input-field:focus { border-color: #71927a; box-shadow: 0 0 0 3px rgba(113,146,122,0.08); }
+        .button {
+            width: 100%; height: 46px; border: none; border-radius: 10px; background: #183d2b; color: white;
+            font-size: 11px; font-weight: 750; cursor: pointer; margin-top: 8px;
+        }
+        .button:hover { background: #24553a; }
+        .link { text-align: center; margin-top: 18px; font-size: 10px; color: #7f8a84; }
+        .link a { color: #315d3d; text-decoration: none; font-weight: 700; }
+        .helptext { color: #78857f; font-size: 9px; margin-top: 6px; display: block; }
+        .errors { color: #a63b3b; background: #f8eeee; padding: 10px 12px; border-radius: 8px; font-size: 9px; margin-bottom: 16px; }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <div class="card">
+            <div class="brand">
+                <div class="brand-mark">C</div>
+                <div class="brand-name">Cache<span>Mode</span></div>
+            </div>
+
+            <h2>Create account</h2>
+            <p class="subtitle">Start building your business with smart insights.</p>
+
+            {% if form.errors %}
+                <div class="errors">
+                    Please correct the errors below.
+                </div>
+            {% endif %}
+
+            <form method="post">
+                {% csrf_token %}
+
+                <div class="field-group">
+                    <label for="id_username">Username</label>
+                    {{ form.username }}
+                    {% if form.username.help_text %}
+                        <small class="helptext">{{ form.username.help_text }}</small>
+                    {% endif %}
+                    {% if form.username.errors %}
+                        <small class="helptext">{{ form.username.errors|join:', ' }}</small>
+                    {% endif %}
+                </div>
+
+                <div class="field-group">
+                    <label for="id_email">Email</label>
+                    {{ form.email }}
+                    {% if form.email.errors %}
+                        <small class="helptext">{{ form.email.errors|join:', ' }}</small>
+                    {% endif %}
+                </div>
+
+                <div class="field-group">
+                    <label for="id_password1">Password</label>
+                    {{ form.password1 }}
+                    {% if form.password1.help_text %}
+                        <small class="helptext">{{ form.password1.help_text }}</small>
+                    {% endif %}
+                    {% if form.password1.errors %}
+                        <small class="helptext">{{ form.password1.errors|join:', ' }}</small>
+                    {% endif %}
+                </div>
+
+                <div class="field-group">
+                    <label for="id_password2">Confirm password</label>
+                    {{ form.password2 }}
+                    {% if form.password2.errors %}
+                        <small class="helptext">{{ form.password2.errors|join:', ' }}</small>
+                    {% endif %}
+                </div>
+
+                <button type="submit" class="button">Create account</button>
+            </form>
+
+            <div class="link">
+                Already have an account? <a href="/login/">Sign in</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

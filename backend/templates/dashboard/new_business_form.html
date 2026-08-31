@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>New Business Details</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: linear-gradient(135deg, #f4f8f5 0%, #eef6f2 100%);
+            color: #18221c;
+        }
+        .page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+        }
+        .form-card {
+            width: 100%; max-width: 600px;
+            background: white;
+            border: 1px solid #e4ebe5;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(27, 48, 36, 0.08);
+            padding: 36px 32px;
+        }
+        .title {
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            margin: 0 0 8px;
+            letter-spacing: -1px;
+        }
+        .subtitle {
+            margin: 0 0 26px;
+            color: #6d7d76;
+            font-size: 14px;
+        }
+        .field-group { margin-bottom: 22px; }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 700;
+            font-size: 13px;
+        }
+        input {
+            width: 100%;
+            height: 48px;
+            border: 1px solid #dfe5e0;
+            border-radius: 12px;
+            padding: 0 14px;
+            font-size: 14px;
+            outline: none;
+        }
+        input:focus {
+            border-color: #183d2b;
+            box-shadow: 0 0 0 3px rgba(24, 61, 43, 0.08);
+        }
+        .submit-btn {
+            width: 100%;
+            height: 48px;
+            border: none;
+            border-radius: 12px;
+            background: #183d2b;
+            color: white;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 8px;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 18px;
+            color: #183d2b;
+            font-weight: 700;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <div class="form-card">
+            <h1 class="title">New Business</h1>
+            <p class="subtitle">Share your new business idea, preferred location, and investment budget.</p>
+
+            <form method="POST">
+                {% csrf_token %}
+
+                <div class="field-group">
+                    <label for="id_business_idea">Business idea</label>
+                    {{ form.business_idea }}
+                </div>
+
+                <div class="field-group">
+                    <label for="id_location">Location</label>
+                    {{ form.location }}
+                </div>
+
+                <div class="field-group">
+                    <label for="id_investment_amount">Investment amount</label>
+                    {{ form.investment_amount }}
+                </div>
+
+                <button type="submit" class="submit-btn">Submit Details</button>
+            </form>
+
+            <a href="{% url 'dashboard' %}" class="back-link">← Back</a>
+        </div>
+    </div>
+</body>
+</html>
